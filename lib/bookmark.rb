@@ -1,6 +1,10 @@
+require 'pg'
+
 class Bookmark
-  @all = ['Google', 'Facebook', 'Github']
   def self.all
-    @all.dup
+    database = PG.connect(dbname: 'bookmark_manager')
+    database.exec('SELECT * from bookmarks').map do |bookmark|
+      bookmark['url']
+    end
   end
 end
