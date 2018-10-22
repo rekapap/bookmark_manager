@@ -1,5 +1,5 @@
 require 'pg'
-
+# Bookmark
 class Bookmark
   def self.all
     database = PG.connect(dbname: 'bookmark_manager')
