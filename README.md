@@ -8,7 +8,7 @@ So I can see my favourite websites,
 I would like to view a list of my bookmarks.
 ```
 
-### Setup instructions
+###  Setup instructions
 
 1. Connect to `psql` and create the `bookmark_manager` and `bookmark_manager_test` databases.
 
