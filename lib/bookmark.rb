@@ -1,10 +1,16 @@
-require 'pg'
+require_relative 'dbhelper'
 # Bookmark
 class Bookmark
+  include DBHelper
   def self.all
-    database = PG.connect(dbname: 'bookmark_manager')
-    database.exec('SELECT * from bookmarks').map do |bookmark|
+    connection = DBHelper.make_connection
+    connection.exec('SELECT * from bookmarks').map do |bookmark|
       bookmark['url']
     end
+  end
+
+  def self.create(url:)
+    connection = DBHelper.make_connection
+    connection.exec("INSERT INTO bookmarks (url) VALUES('#{url}')")
   end
 end
