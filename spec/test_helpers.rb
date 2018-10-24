@@ -1,5 +1,14 @@
+require 'pg'
+
 def add_web_bookmarks
-  Bookmark.create(url: "http://www.makersacademy.com")
-  Bookmark.create(url: "http://www.destroyallsoftware.com")
-  Bookmark.create(url: "http://www.google.com")
+  bookmark = Bookmark.create(url: "http://www.makersacademy.com", title: 'Makers Academy')
+  Bookmark.create(url: "http://www.destroyallsoftware.com", title: 'Destroy All Software')
+  Bookmark.create(url: "http://www.google.com", title: 'Google')
+  bookmark
+end
+
+def persisted_data(id:)
+  connection = PG.connect(dbname: 'bookmark_manager_test')
+  result = connection.query("SELECT * FROM bookmarks WHERE id = #{id};")
+  result.first
 end
