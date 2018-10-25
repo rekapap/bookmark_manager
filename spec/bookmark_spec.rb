@@ -3,6 +3,7 @@ require_relative 'test_helpers'
 
 describe Bookmark do
   let(:comment_class) { double(:comment_class) }
+  let(:tag_class) { double(:tag_class) }
   subject(:bookmarks_1) { described_class.new('bookmark_manager') }
 
   describe '.all' do
@@ -76,6 +77,14 @@ describe Bookmark do
       bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
       expect(comment_class).to receive(:where).with(bookmark_id: bookmark.id)
       bookmark.comments(comment_class)
+    end
+  end
+
+  describe '#tags' do
+    it 'calls .where on the Tag class' do
+      bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+      expect(tag_class).to receive(:where).with(bookmark_id: bookmark.id)
+      bookmark.tags(tag_class)
     end
   end
 

@@ -1,5 +1,6 @@
 require_relative 'database_connection'
 require_relative './comment'
+require_relative './tag'
 # Bookmark
 class Bookmark
   attr_reader :id, :title, :url
@@ -44,6 +45,10 @@ class Bookmark
     comment_class.where(bookmark_id: id)
   end
   
+  def tags(tag_class = Tag)
+    tag_class.where(bookmark_id: id)
+  end
+
   private
 
   def self.is_url?(url)
