@@ -1,4 +1,5 @@
 require_relative './database_connection'
+require_relative './bookmark'
 class Tag
   attr_reader :id, :content
   def initialize(id:, content:)
@@ -6,9 +7,16 @@ class Tag
     @content = content
   end
 
+  def bookmarks(bookmark_class = Bookmark)
+    bookmark_class.where(tag_id: id)
+  end
+
   def self.create(content:)
-    result = DatabaseConnection.query("INSERT INTO tags (content) VALUES('#{content}') RETURNING id, content;")
-    Tag.new(id: result[0]['id'], content: result[0]['content'])
+    result = DatabaseConnection.query("SELECT * FROM tags WHERE content = '#{content}';").first
+    unless result
+      result = DatabaseConnection.query("INSERT INTO tags (content) VALUES('#{content}') RETURNING id, content;").first
+    end
+    Tag.new(id: result['id'], content: result['content'])
   end
 
   def self.where(bookmark_id:)
@@ -16,5 +24,10 @@ class Tag
     result.map do |tag|
       Tag.new(id: tag['id'], content: tag['content'])
     end
+  end
+
+  def self.find(id:)
+    result = DatabaseConnection.query("SELECT * FROM tags WHERE id = #{id};").first
+    Tag.new(id: result['id'], content: result['content'])
   end
 end
