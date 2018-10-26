@@ -7,6 +7,6 @@ feature 'registration' do
     click_button('Submit')
 
     expect(page).to have_content "Welcome, user1"
-    expect(page).to have_content "You have registered with this email address: test@example.com"
+    expect(page).to have_content "You are logged in with this email: test@example.com"
   end
 end
