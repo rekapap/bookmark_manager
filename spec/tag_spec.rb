@@ -2,6 +2,7 @@ require 'tag'
 require 'bookmark'
 require 'bookmark_tag'
 require 'test_helpers'
+require 'bookmark_tag'
 
 describe Tag do
   let(:bookmark_class) { double(:bookmark_class) }

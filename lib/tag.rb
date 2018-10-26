@@ -1,5 +1,6 @@
 require_relative './database_connection'
 require_relative './bookmark'
+# Tag
 class Tag
   attr_reader :id, :content
   def initialize(id:, content:)

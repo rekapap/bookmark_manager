@@ -44,12 +44,19 @@ As a user
 So that I can categorize my bookmarks
 I want to add a Tag to a Bookmark
 ```
- ```
+
+```
 As a user
 So that I can find relevant bookmarks
 I want to filter Bookmarks by a Tag
 ```
- 
+
+```
+As a user
+So that I can have a personalised bookmark list
+I want to sign up with my email address
+```
+
  ## How to use
  
  ### To set up the project
