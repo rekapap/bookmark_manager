@@ -2,8 +2,7 @@ require 'user'
 require 'test_helpers'
 
 describe User do
-  describe '.create' do
-    
+  describe '.create' do  
     it 'creates a new user' do
       user = User.create(name: 'user1', email: 'test@example.com', password: 'password123')
       persisted_data = persisted_data(id: user.id, table: 'users')
@@ -17,11 +16,9 @@ describe User do
       expect(BCrypt::Password).to receive(:create).with('password123')
       User.create(name: 'user1', email: 'test@example.com', password: 'password123')
     end
-
   end
 
   describe '.find' do
-
     it 'returns the user' do
       user = User.create(name: 'user1', email: 'test@example.com', password: 'password123')
       result = User.find(id: user.id)
@@ -33,7 +30,13 @@ describe User do
     it 'returns nil if there is no ID given' do
       expect(User.find(id: nil)).to eq nil
     end
-
   end
 
+  describe '.authenticate' do
+    it 'returns a user given a correct username and password, if one exists' do
+      user = User.create(name: 'user1', email: 'test@example.com', password: 'password123')
+      authenticated_user = User.authenticate(email: 'test@example.com', password: 'password123')
+      expect(authenticated_user.id).to eq user.id
+    end
+  end
 end

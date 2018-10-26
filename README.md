@@ -57,6 +57,13 @@ So that I can have a personalised bookmark list
 I want to sign up with my email address
 ```
 
+```
+As a user
+So that I can keep my account secure
+I want to sign in with my email and password
+```
+
+
  ## How to use
  
  ### To set up the project
